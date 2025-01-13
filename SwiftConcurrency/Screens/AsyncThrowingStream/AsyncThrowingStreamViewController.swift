@@ -1,5 +1,5 @@
 //
-//  CancelTaskViewController.swift
+//  AsyncThrowingStreamViewController.swift
 //  SwiftConcurrency
 //
 //  Created by ZverikRS on 09.01.2025.
@@ -8,9 +8,10 @@
 import UIKit
 import SnapKit
 
-final class CancelTaskViewController: BaseViewController {
+final class AsyncThrowingStreamViewController: BaseViewController {
     
     // MARK: - private properties
+    private var asyncThrowingStreamTest: AsyncThrowingStreamTest?
     private let centerLabel: UILabel = {
         let label: UILabel = .init()
         label.font = .init(descriptor: .init(), size: 25)
@@ -43,65 +44,43 @@ final class CancelTaskViewController: BaseViewController {
     @objc private func onButtonTouchUpInside(_ sender: UIButton) {
         switch sender {
         case startButton:
-            task = Task {
-                async let firstTask = firstTask()
-                async let secondTask = secondTask()
-                let _ = await (firstTask, secondTask)
-            }
-            
+            startButtonPressed()
         case cancelButton:
-            task?.cancel()
-            
+            asyncThrowingStreamTest?.cancel()
         default:
             break
         }
     }
     
-    private func firstTask() async {
-        let finish: Int = 5
-        for i in 0 ..< finish {
-            updateLabel(text: "(1) Task running\n\(i)/\(finish)")
-            
-            if Task.isCancelled {
-                updateLabel(text: "(1) Task cancelled\n\(i)/\(finish)")
-                return
+    private func startButtonPressed() {
+        Task {
+            do {
+                if let asyncThrowingStreamTest {
+                    asyncThrowingStreamTest.next()
+                    
+                } else {
+                    let asyncThrowingStreamTest: AsyncThrowingStreamTest = .init()
+                    for try await result in asyncThrowingStreamTest.download(urlStr: "Test") {
+                        switch result {
+                        case .downloading(let value):
+                            centerLabel.text = "downloading: \(value)"
+                            
+                        case .completed(let text):
+                            centerLabel.text = "completed: \(text)"
+                        }
+                    }
+                    
+                    self.asyncThrowingStreamTest = asyncThrowingStreamTest
+                }
+            } catch {
+                centerLabel.text = "\(error)"
             }
-            
-            try? await Task.sleep(nanoseconds: 1_000_000_000)
-            
-            if i == finish - 1 {
-                updateLabel(text: "(1) Task finished")
-            }
-        }
-    }
-    
-    private func secondTask() async {
-        let finish: Int = 5
-        for i in 0 ..< finish {
-            updateLabel(text: "(2) Task running\n\(i)/\(finish)")
-            
-            if Task.isCancelled {
-                updateLabel(text: "(2) Task cancelled\n\(i)/\(finish)")
-                return
-            }
-            
-            try? await Task.sleep(nanoseconds: 1_000_000_000)
-            
-            if i == finish - 1 {
-                updateLabel(text: "(2) Task finished")
-            }
-        }
-    }
-    
-    private func updateLabel(text: String) {
-        Task(priority: .high) { @MainActor in
-            centerLabel.text = text
         }
     }
 }
 
 // MARK: - config
-private extension CancelTaskViewController {
+private extension AsyncThrowingStreamViewController {
     private func config() {
         view.addSubview(centerLabel)
         centerLabel.snp.makeConstraints {

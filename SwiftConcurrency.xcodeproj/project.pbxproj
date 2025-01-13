@@ -15,6 +15,8 @@
 		326D54632D312C8A0070684C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326D54622D312C8A0070684C /* BaseViewController.swift */; };
 		326D54652D31499E0070684C /* WithTaskGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326D54642D31499E0070684C /* WithTaskGroupViewController.swift */; };
 		326D54682D314AD60070684C /* WithTaskGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326D54672D314AD60070684C /* WithTaskGroupService.swift */; };
+		326D546B2D32BEEC0070684C /* AsyncThrowingStreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326D546A2D32BED60070684C /* AsyncThrowingStreamViewController.swift */; };
+		326D546D2D32BF370070684C /* AsyncThrowingStreamTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326D546C2D32BF370070684C /* AsyncThrowingStreamTest.swift */; };
 		32A59ABF2CC3CAAF0040C00E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A59ABE2CC3CAAF0040C00E /* AppDelegate.swift */; };
 		32A59AC12CC3CAAF0040C00E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A59AC02CC3CAAF0040C00E /* SceneDelegate.swift */; };
 		32A59AC32CC3CAAF0040C00E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A59AC22CC3CAAF0040C00E /* MainViewController.swift */; };
@@ -50,6 +52,8 @@
 		326D54622D312C8A0070684C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		326D54642D31499E0070684C /* WithTaskGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithTaskGroupViewController.swift; sourceTree = "<group>"; };
 		326D54672D314AD60070684C /* WithTaskGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithTaskGroupService.swift; sourceTree = "<group>"; };
+		326D546A2D32BED60070684C /* AsyncThrowingStreamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncThrowingStreamViewController.swift; sourceTree = "<group>"; };
+		326D546C2D32BF370070684C /* AsyncThrowingStreamTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncThrowingStreamTest.swift; sourceTree = "<group>"; };
 		32A59ABB2CC3CAAF0040C00E /* SwiftConcurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftConcurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A59ABE2CC3CAAF0040C00E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32A59AC02CC3CAAF0040C00E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +143,15 @@
 			path = WithTaskGroup;
 			sourceTree = "<group>";
 		};
+		326D54692D32BEC80070684C /* AsyncThrowingStream */ = {
+			isa = PBXGroup;
+			children = (
+				326D546A2D32BED60070684C /* AsyncThrowingStreamViewController.swift */,
+				326D546C2D32BF370070684C /* AsyncThrowingStreamTest.swift */,
+			);
+			path = AsyncThrowingStream;
+			sourceTree = "<group>";
+		};
 		32A59AB22CC3CAAF0040C00E = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +221,7 @@
 		32A59AF02CC3CAEC0040C00E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				326D54692D32BEC80070684C /* AsyncThrowingStream */,
 				326D54612D312C840070684C /* Base */,
 				326D545E2D30269E0070684C /* CancelTask */,
 				326D54562D2FF2150070684C /* Counter */,
@@ -384,6 +398,8 @@
 				326D54602D3026A50070684C /* CancelTaskViewController.swift in Sources */,
 				326D545A2D2FFCE50070684C /* CounterModel.swift in Sources */,
 				32A59ABF2CC3CAAF0040C00E /* AppDelegate.swift in Sources */,
+				326D546B2D32BEEC0070684C /* AsyncThrowingStreamViewController.swift in Sources */,
+				326D546D2D32BF370070684C /* AsyncThrowingStreamTest.swift in Sources */,
 				326D54632D312C8A0070684C /* BaseViewController.swift in Sources */,
 				326D545C2D30101B0070684C /* StructuredViewController.swift in Sources */,
 				326D54652D31499E0070684C /* WithTaskGroupViewController.swift in Sources */,
