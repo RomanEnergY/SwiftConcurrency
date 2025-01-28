@@ -25,6 +25,7 @@
 		32A59AD62CC3CAB10040C00E /* SwiftConcurrencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A59AD52CC3CAB10040C00E /* SwiftConcurrencyTests.swift */; };
 		32A59AE02CC3CAB10040C00E /* SwiftConcurrencyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A59ADF2CC3CAB10040C00E /* SwiftConcurrencyUITests.swift */; };
 		32A59AE22CC3CAB10040C00E /* SwiftConcurrencyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A59AE12CC3CAB10040C00E /* SwiftConcurrencyUITestsLaunchTests.swift */; };
+		32EB717F2D4811F8000B0EEF /* AlgoritmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EB717E2D4811F8000B0EEF /* AlgoritmViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		32A59ADB2CC3CAB10040C00E /* SwiftConcurrencyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftConcurrencyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A59ADF2CC3CAB10040C00E /* SwiftConcurrencyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftConcurrencyUITests.swift; sourceTree = "<group>"; };
 		32A59AE12CC3CAB10040C00E /* SwiftConcurrencyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftConcurrencyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		32EB717E2D4811F8000B0EEF /* AlgoritmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgoritmViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 		32A59AF02CC3CAEC0040C00E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				32EB71802D481342000B0EEF /* AlgoritmViewController */,
 				326D54692D32BEC80070684C /* AsyncThrowingStream */,
 				326D54612D312C840070684C /* Base */,
 				326D545E2D30269E0070684C /* CancelTask */,
@@ -255,6 +258,14 @@
 				32A59AC72CC3CAB10040C00E /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		32EB71802D481342000B0EEF /* AlgoritmViewController */ = {
+			isa = PBXGroup;
+			children = (
+				32EB717E2D4811F8000B0EEF /* AlgoritmViewController.swift */,
+			);
+			path = AlgoritmViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -404,6 +415,7 @@
 				326D545C2D30101B0070684C /* StructuredViewController.swift in Sources */,
 				326D54652D31499E0070684C /* WithTaskGroupViewController.swift in Sources */,
 				326D54682D314AD60070684C /* WithTaskGroupService.swift in Sources */,
+				32EB717F2D4811F8000B0EEF /* AlgoritmViewController.swift in Sources */,
 				32A59AC12CC3CAAF0040C00E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

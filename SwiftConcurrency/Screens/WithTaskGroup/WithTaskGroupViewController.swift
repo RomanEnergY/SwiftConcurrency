@@ -48,6 +48,8 @@ final class WithTaskGroupViewController: BaseViewController {
         Task {
             await withTaskGroupService.setDelegate(self)
         }
+        
+        
     }
     
     // MARK: - private methods

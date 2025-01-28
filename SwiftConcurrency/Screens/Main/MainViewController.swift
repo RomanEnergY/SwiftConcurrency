@@ -38,6 +38,7 @@ private extension MainViewController {
         stackView.addArrangedSubview(configCancelTaskButton())
         stackView.addArrangedSubview(configWithTaskGroupButton())
         stackView.addArrangedSubview(configAsyncThrowingStreamButton())
+        stackView.addArrangedSubview(configAlgoritmButton())
     }
 }
 
@@ -112,6 +113,21 @@ private extension MainViewController {
     
     @objc private func onAsyncThrowingStreamButtonTouchUpInside(_ sender: UIButton) {
         let vc: AsyncThrowingStreamViewController = .init()
+        present(vc, animated: true)
+    }
+}
+
+// MARK: - AsyncThrowingStreamButton
+private extension MainViewController {
+    private func configAlgoritmButton() -> UIButton {
+        let button: UIButton = .init(type: .system)
+        button.setTitle("AlgoritmViewController", for: .normal)
+        button.addTarget(self, action: #selector(onAlgoritmButtonTouchUpInside), for: .touchUpInside)
+        return button
+    }
+    
+    @objc private func onAlgoritmButtonTouchUpInside(_ sender: UIButton) {
+        let vc: AlgoritmViewController = .init()
         present(vc, animated: true)
     }
 }

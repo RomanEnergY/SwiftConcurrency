@@ -55,13 +55,16 @@ actor WithTaskGroupService {
         return try await withThrowingTaskGroup(of: Any?.self) { group in
             // Добавляем первую задачу
             group.addTask { [weak self] in
-                return try await self?.fetchObject1()
+                try await self?.fetchObject1()
             }
             
             // Добавляем вторую задачу
             group.addTask { [weak self] in
-                return try await self?.fetchObject2()
+                try await self?.fetchObject2()
             }
+            
+            print(group)
+            dump(group)
             
             var object1: WithTaskGroupModel.Object1?
             var object2: WithTaskGroupModel.Object2?
