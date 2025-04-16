@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32296B1A2D551AB500F11ED7 /* GSDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32296B192D551AB500F11ED7 /* GSDViewController.swift */; };
 		326D54552D2FF1EF0070684C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 326D54542D2FF1EF0070684C /* SnapKit */; };
 		326D54582D2FF2250070684C /* CounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326D54572D2FF2250070684C /* CounterViewController.swift */; };
 		326D545A2D2FFCE50070684C /* CounterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326D54592D2FFCE50070684C /* CounterModel.swift */; };
@@ -17,6 +18,7 @@
 		326D54682D314AD60070684C /* WithTaskGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326D54672D314AD60070684C /* WithTaskGroupService.swift */; };
 		326D546B2D32BEEC0070684C /* AsyncThrowingStreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326D546A2D32BED60070684C /* AsyncThrowingStreamViewController.swift */; };
 		326D546D2D32BF370070684C /* AsyncThrowingStreamTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326D546C2D32BF370070684C /* AsyncThrowingStreamTest.swift */; };
+		329C74122D60E7FD00C71E06 /* BubbleSortingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329C74112D60E7FD00C71E06 /* BubbleSortingViewController.swift */; };
 		32A59ABF2CC3CAAF0040C00E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A59ABE2CC3CAAF0040C00E /* AppDelegate.swift */; };
 		32A59AC12CC3CAAF0040C00E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A59AC02CC3CAAF0040C00E /* SceneDelegate.swift */; };
 		32A59AC32CC3CAAF0040C00E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A59AC22CC3CAAF0040C00E /* MainViewController.swift */; };
@@ -46,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		32296B192D551AB500F11ED7 /* GSDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDViewController.swift; sourceTree = "<group>"; };
 		326D54572D2FF2250070684C /* CounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterViewController.swift; sourceTree = "<group>"; };
 		326D54592D2FFCE50070684C /* CounterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterModel.swift; sourceTree = "<group>"; };
 		326D545B2D30101B0070684C /* StructuredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +58,7 @@
 		326D54672D314AD60070684C /* WithTaskGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithTaskGroupService.swift; sourceTree = "<group>"; };
 		326D546A2D32BED60070684C /* AsyncThrowingStreamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncThrowingStreamViewController.swift; sourceTree = "<group>"; };
 		326D546C2D32BF370070684C /* AsyncThrowingStreamTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncThrowingStreamTest.swift; sourceTree = "<group>"; };
+		329C74112D60E7FD00C71E06 /* BubbleSortingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleSortingViewController.swift; sourceTree = "<group>"; };
 		32A59ABB2CC3CAAF0040C00E /* SwiftConcurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftConcurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A59ABE2CC3CAAF0040C00E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32A59AC02CC3CAAF0040C00E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +100,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		32296B182D551AAA00F11ED7 /* GSDViewController */ = {
+			isa = PBXGroup;
+			children = (
+				32296B192D551AB500F11ED7 /* GSDViewController.swift */,
+			);
+			path = GSDViewController;
+			sourceTree = "<group>";
+		};
 		326D54532D2FF1EF0070684C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +164,14 @@
 				326D546C2D32BF370070684C /* AsyncThrowingStreamTest.swift */,
 			);
 			path = AsyncThrowingStream;
+			sourceTree = "<group>";
+		};
+		329C74102D60E7E700C71E06 /* BubbleSorting */ = {
+			isa = PBXGroup;
+			children = (
+				329C74112D60E7FD00C71E06 /* BubbleSortingViewController.swift */,
+			);
+			path = BubbleSorting;
 			sourceTree = "<group>";
 		};
 		32A59AB22CC3CAAF0040C00E = {
@@ -226,8 +246,10 @@
 				32EB71802D481342000B0EEF /* AlgoritmViewController */,
 				326D54692D32BEC80070684C /* AsyncThrowingStream */,
 				326D54612D312C840070684C /* Base */,
+				329C74102D60E7E700C71E06 /* BubbleSorting */,
 				326D545E2D30269E0070684C /* CancelTask */,
 				326D54562D2FF2150070684C /* Counter */,
+				32296B182D551AAA00F11ED7 /* GSDViewController */,
 				32A59AF22CC3CAFD0040C00E /* LaunchScreen */,
 				32A59AF12CC3CAF30040C00E /* Main */,
 				326D545D2D3010260070684C /* Structured */,
@@ -404,12 +426,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32296B1A2D551AB500F11ED7 /* GSDViewController.swift in Sources */,
 				326D54582D2FF2250070684C /* CounterViewController.swift in Sources */,
 				32A59AC32CC3CAAF0040C00E /* MainViewController.swift in Sources */,
 				326D54602D3026A50070684C /* CancelTaskViewController.swift in Sources */,
 				326D545A2D2FFCE50070684C /* CounterModel.swift in Sources */,
 				32A59ABF2CC3CAAF0040C00E /* AppDelegate.swift in Sources */,
 				326D546B2D32BEEC0070684C /* AsyncThrowingStreamViewController.swift in Sources */,
+				329C74122D60E7FD00C71E06 /* BubbleSortingViewController.swift in Sources */,
 				326D546D2D32BF370070684C /* AsyncThrowingStreamTest.swift in Sources */,
 				326D54632D312C8A0070684C /* BaseViewController.swift in Sources */,
 				326D545C2D30101B0070684C /* StructuredViewController.swift in Sources */,

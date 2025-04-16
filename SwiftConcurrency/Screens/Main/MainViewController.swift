@@ -10,6 +10,18 @@ import SnapKit
 
 final class MainViewController: UIViewController {
     
+    // MARK: - private properties
+    private let buttons: [Button<UIViewController>] = [
+        .init(type: GSDViewController.self),
+        .init(type: CounterViewController.self),
+        .init(type: StructuredViewController.self),
+        .init(type: CancelTaskViewController.self),
+        .init(type: WithTaskGroupViewController.self),
+        .init(type: AsyncThrowingStreamViewController.self),
+        .init(type: AlgoritmViewController.self),
+        .init(type: BubbleSortingViewController.self)
+    ]
+    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,101 +45,37 @@ private extension MainViewController {
             $0.leading.trailing.equalToSuperview()
         }
         
-        stackView.addArrangedSubview(configCounterButton())
-        stackView.addArrangedSubview(configStructuredButton())
-        stackView.addArrangedSubview(configCancelTaskButton())
-        stackView.addArrangedSubview(configWithTaskGroupButton())
-        stackView.addArrangedSubview(configAsyncThrowingStreamButton())
-        stackView.addArrangedSubview(configAlgoritmButton())
+        buttons.forEach {
+            stackView.addArrangedSubview($0.create())
+            $0.onTouchUpInside = { [weak self] vc in
+                self?.present(vc, animated: true)
+            }
+        }
     }
 }
 
-// MARK: - CounterButton
 private extension MainViewController {
-    private func configCounterButton() -> UIButton {
-        let button: UIButton = .init(type: .system)
-        button.setTitle("CounterViewController", for: .normal)
-        button.addTarget(self, action: #selector(onCounterButtonTouchUpInside), for: .touchUpInside)
-        return button
-    }
-    
-    @objc private func onCounterButtonTouchUpInside(_ sender: UIButton) {
-        let vc: CounterViewController = .init()
-        present(vc, animated: true)
-    }
-}
-
-// MARK: - StructuredButton
-private extension MainViewController {
-    private func configStructuredButton() -> UIButton {
-        let button: UIButton = .init(type: .system)
-        button.setTitle("StructuredViewController", for: .normal)
-        button.addTarget(self, action: #selector(onStructuredButtonTouchUpInside), for: .touchUpInside)
-        return button
-    }
-    
-    @objc private func onStructuredButtonTouchUpInside(_ sender: UIButton) {
-        let vc: StructuredViewController = .init()
-        present(vc, animated: true)
-    }
-}
-
-// MARK: - CancelTaskButton
-private extension MainViewController {
-    private func configCancelTaskButton() -> UIButton {
-        let button: UIButton = .init(type: .system)
-        button.setTitle("CancelTaskViewController", for: .normal)
-        button.addTarget(self, action: #selector(onCancelTaskButtonTouchUpInside), for: .touchUpInside)
-        return button
-    }
-    
-    @objc private func onCancelTaskButtonTouchUpInside(_ sender: UIButton) {
-        let vc: CancelTaskViewController = .init()
-        present(vc, animated: true)
-    }
-}
-
-// MARK: - WithTaskGroupButton
-private extension MainViewController {
-    private func configWithTaskGroupButton() -> UIButton {
-        let button: UIButton = .init(type: .system)
-        button.setTitle("WithTaskGroupViewController", for: .normal)
-        button.addTarget(self, action: #selector(onWithTaskGroupButtonTouchUpInside), for: .touchUpInside)
-        return button
-    }
-    
-    @objc private func onWithTaskGroupButtonTouchUpInside(_ sender: UIButton) {
-        let vc: WithTaskGroupViewController = .init()
-        present(vc, animated: true)
-    }
-}
-
-// MARK: - AsyncThrowingStreamButton
-private extension MainViewController {
-    private func configAsyncThrowingStreamButton() -> UIButton {
-        let button: UIButton = .init(type: .system)
-        button.setTitle("AsyncThrowingStreamViewController", for: .normal)
-        button.addTarget(self, action: #selector(onAsyncThrowingStreamButtonTouchUpInside), for: .touchUpInside)
-        return button
-    }
-    
-    @objc private func onAsyncThrowingStreamButtonTouchUpInside(_ sender: UIButton) {
-        let vc: AsyncThrowingStreamViewController = .init()
-        present(vc, animated: true)
-    }
-}
-
-// MARK: - AsyncThrowingStreamButton
-private extension MainViewController {
-    private func configAlgoritmButton() -> UIButton {
-        let button: UIButton = .init(type: .system)
-        button.setTitle("AlgoritmViewController", for: .normal)
-        button.addTarget(self, action: #selector(onAlgoritmButtonTouchUpInside), for: .touchUpInside)
-        return button
-    }
-    
-    @objc private func onAlgoritmButtonTouchUpInside(_ sender: UIButton) {
-        let vc: AlgoritmViewController = .init()
-        present(vc, animated: true)
+    final class Button<T: UIViewController> {
+        private let type: T.Type
+        var onTouchUpInside: ((_ vc: UIViewController) -> Void)?
+        
+        // MARK: - initializers
+        init(type: T.Type) {
+            self.type = type
+        }
+        
+        // MARK: - public methods
+        func create() -> UIButton {
+            let button: UIButton = .init(type: .system)
+            let title: Substring = type.description().split(separator: ".").last ?? ""
+            button.setTitle(.init(title), for: .normal)
+            button.addTarget(self, action: #selector(_onTouchUpInside), for: .touchUpInside)
+            return button
+        }
+        
+        // MARK: - private methods
+        @objc private func _onTouchUpInside(_ sender: UIButton) {
+            onTouchUpInside?(type.init())
+        }
     }
 }

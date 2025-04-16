@@ -25,10 +25,6 @@ final class AlgoritmViewController: BaseViewController {
         return button
     }()
     
-    // MARK: - initializers
-    deinit {
-    }
-    
     // MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
