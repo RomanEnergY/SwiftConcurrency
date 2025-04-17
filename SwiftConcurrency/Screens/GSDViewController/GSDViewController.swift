@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 import SnapKit
 
 final class GSDViewController: BaseViewController {
@@ -13,10 +14,10 @@ final class GSDViewController: BaseViewController {
     // MARK: - private properties
     private var isCancelled: Bool = false
     private let countInteration: Int = 10_000
-    private var threadNumbers: Set<Int> = []
-    private var threadUids: Set<String> = []
+    private var datas: Set<GSDThreadData> = []
     private let synchronizationQueue: DispatchQueue = .init(label: "synchronization")
     private let concurrentQueue: DispatchQueue = .init(label: "concurrent", attributes: .concurrent)
+    private let rootView: GSDView = .init()
     private let label: UILabel = {
         let label: UILabel = .init()
         label.textAlignment = .center
@@ -24,7 +25,7 @@ final class GSDViewController: BaseViewController {
         return label
     }()
     private lazy var stackView: UIStackView = {
-        let stackView: UIStackView = .init(arrangedSubviews: [sirealButton, activityIndicatorView, concurrentButton])
+        let stackView: UIStackView = .init(arrangedSubviews: [sirealButton, concurrentButton])
         stackView.axis = .horizontal
         stackView.spacing = 10
         stackView.alignment = .center
@@ -45,12 +46,6 @@ final class GSDViewController: BaseViewController {
         button.addTarget(self, action: #selector(buttonTouchUpInside), for: .touchUpInside)
         return button
     }()
-    private let activityIndicatorView: UIActivityIndicatorView = {
-        let activityIndicatorView: UIActivityIndicatorView = .init(style: .large)
-        activityIndicatorView.hidesWhenStopped = true
-        activityIndicatorView.color = .blue
-        return activityIndicatorView
-    }()
     
     // MARK: - life cycle
     override func viewDidLoad() {
@@ -66,88 +61,84 @@ final class GSDViewController: BaseViewController {
 // MARK: - calculated properties
 private extension GSDViewController {
     func config() {
+        view.addSubview(rootView)
+        rootView.snp.makeConstraints {
+            $0.leading.top.trailing.equalToSuperview()
+        }
+        
         view.addSubview(label)
         label.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.top.equalTo(rootView.snp.bottom).offset(5)
+            $0.centerX.equalToSuperview()
         }
         
         view.addSubview(stackView)
         stackView.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom).offset(10)
+            $0.top.equalTo(label.snp.bottom).offset(5)
             $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
     
+    private func loading(isStart: Bool) {
+        label.textColor = isStart ? .gray : .black
+        if isStart {
+            rootView.startLoad()
+        } else {
+            rootView.finishLoad()
+        }
+        
+        stackView.arrangedSubviews.forEach {
+            switch $0 {
+            case let button as UIButton:
+                button.isEnabled = !isStart
+                
+            default:
+                break
+            }
+        }
+    }
+    
+    private func finishLoad(initDate: Date) {
+        rootView.updateView(datas: datas)
+        label.text = "time: \(Date().timeIntervalSince(initDate))"
+        datas.removeAll()
+        loading(isStart: false)
+    }
+    
     @objc func buttonTouchUpInside(_ sender: UIButton) {
-        let date: Date = .init()
+        let initDate: Date = .init()
         let workItem: DispatchWorkItem = .init {
             DispatchQueue.main.async { [weak self] in
-                guard let self else { return }
-                let texts: [String] = [
-                    "threads count: \(self.threadNumbers.count)",
-                    "thread uids: \(self.threadUids.count)",
-                    "date: \(Date().timeIntervalSince(date))",
-                ]
-                
-                self.label.text = texts.joined(separator: "\n")
-                self.threadNumbers.removeAll()
-                self.threadUids.removeAll()
-                self.finishTestMethod()
+                self?.finishLoad(initDate: initDate)
             }
         }
         
         switch sender {
         case sirealButton:
-            startTestMethod()
-            sirealTestMethod(workItem: workItem)
+            loading(isStart: true)
+            sirealTestMethod(initDate: initDate, workItem: workItem)
             
         case concurrentButton:
-            startTestMethod()
-            concurrentTestMethod(workItem: workItem)
+            loading(isStart: true)
+            concurrentTestMethod(initDate: initDate, workItem: workItem)
             
         default:
             break
         }
     }
-    
-    private func startTestMethod() {
-        label.textColor = .gray
-        stackView.arrangedSubviews.forEach {
-            switch $0 {
-                case let activityIndicatorView as UIActivityIndicatorView:
-                activityIndicatorView.startAnimating()
-                
-            default:
-                $0.isHidden = true
-            }
-        }
-    }
-    
-    private func finishTestMethod() {
-        label.textColor = .black
-        stackView.arrangedSubviews.forEach {
-            switch $0 {
-                case let activityIndicatorView as UIActivityIndicatorView:
-                activityIndicatorView.stopAnimating()
-                
-            default:
-                $0.isHidden = false
-            }
-        }
-        
-    }
 }
 
 // MARK: - calculated properties
 private extension GSDViewController {
-    func sirealTestMethod(workItem: DispatchWorkItem) {
+    func sirealTestMethod(initDate: Date, workItem: DispatchWorkItem) {
         DispatchQueue.global().async { [weak self, countInteration] in
             let group: DispatchGroup = .init()
             for i in 0 ..< countInteration {
                 group.enter()
                 let aueue: DispatchQueue = .init(label: "sireal")
                 aueue.async { [weak self] in
-                    self?.testMethod(index: i)
+                    self?.testMethod(initDate: initDate, index: i)
                     group.leave()
                 }
             }
@@ -158,13 +149,13 @@ private extension GSDViewController {
         }
     }
     
-    func concurrentTestMethod(workItem: DispatchWorkItem) {
+    func concurrentTestMethod(initDate: Date, workItem: DispatchWorkItem) {
         DispatchQueue.global().async { [weak self, countInteration] in
             let group: DispatchGroup = .init()
             for i in 0 ..< countInteration {
                 group.enter()
                 self?.concurrentQueue.async { [weak self] in
-                    self?.testMethod(index: i)
+                    self?.testMethod(initDate: initDate, index: i)
                     group.leave()
                 }
             }
@@ -175,24 +166,18 @@ private extension GSDViewController {
         }
     }
     
-    private func testMethod(index: Int) {
+    private func testMethod(initDate: Date, index: Int) {
         if !isCancelled {
+            if let data = GSDThreadData(initDate: initDate, thread: Thread.current) {
             Thread.sleep(forTimeInterval: 0.01)
-            let threadCurrent = Thread.current
-            if let number = threadCurrent.number {
+                let _data = data.updateFinishDate()
                 synchronize { [weak self] in
-                    self?.threadNumbers.insert(number)
+                    self?.datas.insert(_data)
                 }
-            }
-            
-            if let uid = threadCurrent.nSThreadUid {
-                synchronize { [weak self] in
-                    self?.threadUids.insert(uid)
+                
+                if !isCancelled {
+                    print(_data)
                 }
-            }
-            
-            if !isCancelled {
-                print("index(\(index)): \(threadCurrent)")
             }
         }
     }
@@ -200,53 +185,6 @@ private extension GSDViewController {
     private func synchronize(completion: @escaping () -> Void) {
         synchronizationQueue.sync {
             completion()
-        }
-    }
-}
-
-extension Thread {
-    var number: Int? {
-        let threadCurrent = "\(self)"
-        return threadCurrent.threadNumber
-    }
-    
-    var nSThreadUid: String? {
-        let threadCurrent = "\(self)"
-        return threadCurrent.nSThreadUid
-    }
-}
-
-private extension String {
-    var threadNumber: Int? {
-        if let numberStr = find(pattern: "number = (?<number>\\d{1,}),", key: "number") {
-            return Int(numberStr)
-        } else {
-            return nil
-        }
-    }
-    
-    var nSThreadUid: String? {
-        find(pattern: "<NSThread: (?<uid>\\S{1,})>", key: "uid")
-    }
-    
-    func find(pattern: String, key: String) -> String? {
-        let range = NSRange(startIndex ..< endIndex, in: self)
-        if let regex = try? NSRegularExpression(pattern: pattern),
-           let match = regex.firstMatch(in: self, range: range),
-           let key = match.getRange(key: key, in: self) {
-            return key
-        } else {
-            return nil
-        }
-    }
-}
-
-private extension NSTextCheckingResult {
-    func getRange(key: String, in text: String) -> String? {
-        if let range = Range(range(withName: key), in: text) {
-            return String(text[range])
-        } else {
-            return nil
         }
     }
 }

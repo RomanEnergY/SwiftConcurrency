@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		32296B1A2D551AB500F11ED7 /* GSDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32296B192D551AB500F11ED7 /* GSDViewController.swift */; };
+		3234173F2DB04C7B0051C373 /* GSDThreadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3234173E2DB04C7B0051C373 /* GSDThreadData.swift */; };
+		323417412DB052660051C373 /* GSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323417402DB052660051C373 /* GSDView.swift */; };
 		326D54552D2FF1EF0070684C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 326D54542D2FF1EF0070684C /* SnapKit */; };
 		326D54582D2FF2250070684C /* CounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326D54572D2FF2250070684C /* CounterViewController.swift */; };
 		326D545A2D2FFCE50070684C /* CounterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326D54592D2FFCE50070684C /* CounterModel.swift */; };
@@ -49,6 +51,8 @@
 
 /* Begin PBXFileReference section */
 		32296B192D551AB500F11ED7 /* GSDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDViewController.swift; sourceTree = "<group>"; };
+		3234173E2DB04C7B0051C373 /* GSDThreadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDThreadData.swift; sourceTree = "<group>"; };
+		323417402DB052660051C373 /* GSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDView.swift; sourceTree = "<group>"; };
 		326D54572D2FF2250070684C /* CounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterViewController.swift; sourceTree = "<group>"; };
 		326D54592D2FFCE50070684C /* CounterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterModel.swift; sourceTree = "<group>"; };
 		326D545B2D30101B0070684C /* StructuredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredViewController.swift; sourceTree = "<group>"; };
@@ -103,9 +107,19 @@
 		32296B182D551AAA00F11ED7 /* GSDViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3234173E2DB04C7B0051C373 /* GSDThreadData.swift */,
+				323417402DB052660051C373 /* GSDView.swift */,
 				32296B192D551AB500F11ED7 /* GSDViewController.swift */,
 			);
 			path = GSDViewController;
+			sourceTree = "<group>";
+		};
+		3234173D2DB016D90051C373 /* Halpers */ = {
+			isa = PBXGroup;
+			children = (
+				326D54622D312C8A0070684C /* BaseViewController.swift */,
+			);
+			path = Halpers;
 			sourceTree = "<group>";
 		};
 		326D54532D2FF1EF0070684C /* Frameworks */ = {
@@ -138,14 +152,6 @@
 				326D545F2D3026A50070684C /* CancelTaskViewController.swift */,
 			);
 			path = CancelTask;
-			sourceTree = "<group>";
-		};
-		326D54612D312C840070684C /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				326D54622D312C8A0070684C /* BaseViewController.swift */,
-			);
-			path = Base;
 			sourceTree = "<group>";
 		};
 		326D54662D3149C90070684C /* WithTaskGroup */ = {
@@ -199,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				32A59AEF2CC3CAC80040C00E /* App */,
+				3234173D2DB016D90051C373 /* Halpers */,
 				32A59AEE2CC3CAC30040C00E /* Helpers */,
 				32A59AF32CC3CB0E0040C00E /* Resources */,
 				32A59AF02CC3CAEC0040C00E /* Screens */,
@@ -245,7 +252,6 @@
 			children = (
 				32EB71802D481342000B0EEF /* AlgoritmViewController */,
 				326D54692D32BEC80070684C /* AsyncThrowingStream */,
-				326D54612D312C840070684C /* Base */,
 				329C74102D60E7E700C71E06 /* BubbleSorting */,
 				326D545E2D30269E0070684C /* CancelTask */,
 				326D54562D2FF2150070684C /* Counter */,
@@ -427,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32296B1A2D551AB500F11ED7 /* GSDViewController.swift in Sources */,
+				3234173F2DB04C7B0051C373 /* GSDThreadData.swift in Sources */,
 				326D54582D2FF2250070684C /* CounterViewController.swift in Sources */,
 				32A59AC32CC3CAAF0040C00E /* MainViewController.swift in Sources */,
 				326D54602D3026A50070684C /* CancelTaskViewController.swift in Sources */,
@@ -439,6 +446,7 @@
 				326D545C2D30101B0070684C /* StructuredViewController.swift in Sources */,
 				326D54652D31499E0070684C /* WithTaskGroupViewController.swift in Sources */,
 				326D54682D314AD60070684C /* WithTaskGroupService.swift in Sources */,
+				323417412DB052660051C373 /* GSDView.swift in Sources */,
 				32EB717F2D4811F8000B0EEF /* AlgoritmViewController.swift in Sources */,
 				32A59AC12CC3CAAF0040C00E /* SceneDelegate.swift in Sources */,
 			);
